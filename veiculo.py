@@ -15,14 +15,8 @@ def cadastrar_veiculo(
         conexao = conectar()
         cursor = conexao.cursor()
 
-        sql = """
-        INSERT INTO Veiculo
-        (placa, modelo, cor, id_cliente, id_categoria)
-        VALUES (%s,%s,%s,%s,%s)
-        """
-
-        cursor.execute(
-            sql,
+        cursor.callproc(
+            "sp_cadastrar_veiculo",
             (
                 placa,
                 modelo,

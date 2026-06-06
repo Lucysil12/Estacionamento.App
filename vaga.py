@@ -9,13 +9,13 @@ def cadastrar_vaga(numero, id_setor):
         conexao = conectar()
         cursor = conexao.cursor()
 
-        sql = """
-        INSERT INTO Vaga
-        (numero, status_vaga, id_setor)
-        VALUES (%s,'Livre',%s)
-        """
-
-        cursor.execute(sql, (numero, id_setor))
+        cursor.callproc(
+            "sp_cadastrar_vaga",
+            (
+                numero,
+                id_setor
+            )
+        )
 
         conexao.commit()
 

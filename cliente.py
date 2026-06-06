@@ -7,19 +7,29 @@ def cadastrar_cliente(nome, cpf, telefone):
     conexao = conectar()
     cursor = conexao.cursor()
 
-    sql = """
-    INSERT INTO Cliente(nome, cpf, telefone)
-    VALUES (%s,%s,%s)
-    """
+    try:
 
-    cursor.execute(sql, (nome, cpf, telefone))
+        cursor.callproc(
+            "sp_cadastrar_cliente",
+            (
+                nome,
+                cpf,
+                telefone
+            )
+        )
 
-    conexao.commit()
+        conexao.commit()
 
-    print("Cliente cadastrado!")
+        print("Cliente cadastrado!")
 
-    cursor.close()
-    conexao.close()
+    except Error as erro:
+
+        print(f"Erro ao cadastrar cliente: {erro}")
+
+    finally:
+
+        cursor.close()
+        conexao.close()
 
 
 def listar_clientes():

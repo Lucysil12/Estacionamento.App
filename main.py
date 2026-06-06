@@ -2,6 +2,7 @@ from cliente import *
 from veiculo import *
 from vaga import *
 from ticket import * 
+from setor import *
 from conexao import conectar 
 
 
@@ -264,6 +265,50 @@ def menu_tickets():
         else:
 
             print("Opção inválida!")
+def menu_setores():
+    while True:
+        print("\n===== SETORES =====")
+        print("1 - Cadastrar")
+        print("2 - Listar")
+        print("3 - Atualizar")
+        print("4 - Excluir")
+        print("0 - Voltar")
+
+        op = input("Escolha: ")
+        if op == "1":
+
+            nome_setor = input("Nome do setor: ")
+            tipo_setor = input("Tipo do setor: ")
+            cadastrar_setor(
+                nome_setor,
+                tipo_setor
+            )
+        elif op == "2":
+
+            listar_setores()
+
+        elif op == "3":
+             id_setor = int(input("ID Setor: "))
+             nome_setor = input("Novo nome do setor: ")
+             tipo_setor = input("Novo tipo do setor: ")
+
+             atualizar_setor(
+                id_setor,
+                nome_setor,
+                tipo_setor
+            )
+        elif op == "4":
+
+            id_setor = int(input("ID Setor: "))
+
+            excluir_setor(id_setor)
+
+        elif op == "0":
+            break
+
+        else:
+
+            print("Opção inválida!")
 
 def menu_relatorios():
 
@@ -307,7 +352,8 @@ while True:
     print("2 - Veículos")
     print("3 - Vagas")
     print("4 - Tickets")
-    print("5 - Relatórios")
+    print("5 - Setores")
+    print("6 - Relatórios")
     print("0 - Sair")
 
     opcao = input("\nEscolha uma opção: ")
@@ -327,10 +373,13 @@ while True:
     elif opcao == "4":
 
         menu_tickets()
-
     elif opcao == "5":
 
-        menu_relatorios()
+       menu_setores()
+
+    elif opcao == "6":
+
+       menu_relatorios()
 
     elif opcao == "0":
 
